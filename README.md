@@ -60,7 +60,7 @@ Antes de começar, certifique-se de ter instalado:
 
 ```bash
 # Clone o projeto
-git clone <url-do-repositorio>
+git clone <https://github.com/Fro1s/e-commerce_web.git>
 
 # Entre no diretório
 cd e-commerce_web
