@@ -12,6 +12,7 @@ import { useCart } from '@/contexts/cart-context';
 import { useRouter } from 'next/navigation';
 import { useSession } from 'next-auth/react';
 import { LoginDialog } from '@/components/(auth)/login-dialog';
+import { formatPrice } from '@/lib/utils';
 
 interface ProductDetailProps {
   productId: string;
@@ -71,13 +72,6 @@ export function ProductDetail({ productId }: ProductDetailProps) {
     });
 
     router.push('/checkout');
-  };
-
-  const formatPrice = (value: number) => {
-    return new Intl.NumberFormat('pt-BR', {
-      style: 'currency',
-      currency: 'BRL',
-    }).format(value);
   };
 
   if (isLoading) {
@@ -156,7 +150,7 @@ export function ProductDetail({ productId }: ProductDetailProps) {
 
           <div>
             <div className="text-4xl font-bold text-primary mb-2">
-              {formatPrice(productData.amount / 100)}
+              {formatPrice(productData.amount)}
             </div>
             {isOutOfStock && (
               <p className="text-destructive font-medium">Produto esgotado</p>

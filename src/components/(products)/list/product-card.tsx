@@ -7,6 +7,7 @@ import { Card, CardContent, CardFooter } from '@/components/ui/card';
 import { ShoppingCart } from 'lucide-react';
 import { useState } from 'react';
 import { useCart } from '@/contexts/cart-context';
+import { formatPrice } from '@/lib/utils';
 
 interface ProductCardProps {
   id: string;
@@ -37,13 +38,6 @@ export function ProductCard({
       stock,
       quantity: 1,
     });
-  };
-
-  const formatPrice = (value: number) => {
-    return new Intl.NumberFormat('pt-BR', {
-      style: 'currency',
-      currency: 'BRL',
-    }).format(value);
   };
 
   return (
@@ -85,7 +79,7 @@ export function ProductCard({
           )}
           <div className="mt-3">
             <span className="text-2xl font-bold text-primary">
-              {formatPrice(price)}
+              {formatPrice(price * 100)}
             </span>
           </div>
           {stock <= 0 && (

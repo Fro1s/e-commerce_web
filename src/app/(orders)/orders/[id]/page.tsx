@@ -9,6 +9,7 @@ import { Separator } from '@/components/ui/separator';
 import { ArrowLeft, Package, Clock, CheckCircle2, XCircle, MapPin, CreditCard, QrCode, ShoppingBag } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 import Image from 'next/image';
+import { formatPrice, formatDate, formatTime } from '@/lib/utils';
 
 const statusConfig = {
   pending: {
@@ -42,28 +43,6 @@ export default function OrderDetailPage({ params }: { params: Promise<{ id: stri
   const resolvedParams = use(params);
   const router = useRouter();
   const { data: order, isLoading } = usePaymentControllerGetOrder(resolvedParams.id);
-
-  const formatPrice = (value: number) => {
-    return new Intl.NumberFormat('pt-BR', {
-      style: 'currency',
-      currency: 'BRL',
-    }).format(value / 100);
-  };
-
-  const formatDate = (date: string) => {
-    return new Date(date).toLocaleDateString('pt-BR', {
-      day: '2-digit',
-      month: 'long',
-      year: 'numeric',
-    });
-  };
-
-  const formatTime = (date: string) => {
-    return new Date(date).toLocaleTimeString('pt-BR', {
-      hour: '2-digit',
-      minute: '2-digit',
-    });
-  };
 
   if (isLoading) {
     return (

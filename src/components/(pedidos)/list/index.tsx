@@ -7,6 +7,7 @@ import { Button } from '@/components/ui/button';
 import { Separator } from '@/components/ui/separator';
 import { ChevronRight, Package, Clock, CheckCircle2, XCircle, CreditCard, QrCode } from 'lucide-react';
 import { useRouter } from 'next/navigation';
+import { formatPrice, formatDate, formatTime } from '@/lib/utils';
 
 const statusConfig = {
   pending: {
@@ -44,28 +45,6 @@ const statusConfig = {
 export function OrdersList() {
   const router = useRouter();
   const { data: orders, isLoading } = useListOrders();
-
-  const formatPrice = (value: number) => {
-    return new Intl.NumberFormat('pt-BR', {
-      style: 'currency',
-      currency: 'BRL',
-    }).format(value / 100);
-  };
-
-  const formatDate = (date: string) => {
-    return new Date(date).toLocaleDateString('pt-BR', {
-      day: '2-digit',
-      month: 'short',
-      year: 'numeric',
-    });
-  };
-
-  const formatTime = (date: string) => {
-    return new Date(date).toLocaleTimeString('pt-BR', {
-      hour: '2-digit',
-      minute: '2-digit',
-    });
-  };
 
   if (isLoading) {
     return (

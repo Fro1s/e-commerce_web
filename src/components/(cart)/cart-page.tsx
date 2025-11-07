@@ -11,6 +11,7 @@ import { Minus, Plus, Trash2, ShoppingCart, ArrowRight } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 import { useSession } from 'next-auth/react';
 import { LoginDialog } from '@/components/(auth)/login-dialog';
+import { formatPrice } from '@/lib/utils';
 
 export function CartPage() {
   const { items, updateQuantity, removeItem, totalPrice, clearCart } = useCart();
@@ -18,13 +19,6 @@ export function CartPage() {
   const { data: session } = useSession();
   const [showLoginDialog, setShowLoginDialog] = useState(false);
   const [imageErrors, setImageErrors] = useState<Record<string, boolean>>({});
-
-  const formatPrice = (value: number) => {
-    return new Intl.NumberFormat('pt-BR', {
-      style: 'currency',
-      currency: 'BRL',
-    }).format(value);
-  };
 
   const handleCheckout = () => {
     if (!session) {
@@ -95,10 +89,10 @@ export function CartPage() {
                     <div className="flex justify-between items-start gap-2">
                       <div>
                         <h3 className="font-semibold text-base sm:text-lg mb-1 line-clamp-2">{item.name}</h3>
-                        <p className="text-primary font-bold text-sm sm:text-base">{formatPrice(item.price)}</p>
+                        <p className="text-primary font-bold text-sm sm:text-base">{formatPrice(item.price * 100)}</p>
                       </div>
                       <p className="font-bold text-base sm:text-lg shrink-0">
-                        {formatPrice(item.price * item.quantity)}
+                        {formatPrice(item.price * item.quantity * 100)}
                       </p>
                     </div>
 
@@ -149,12 +143,12 @@ export function CartPage() {
               <div className="space-y-3">
                 <div className="flex justify-between">
                   <span className="text-muted-foreground">Subtotal</span>
-                  <span className="font-medium">{formatPrice(totalPrice)}</span>
+                  <span className="font-medium">{formatPrice(totalPrice * 100)}</span>
                 </div>
                 <Separator />
                 <div className="flex justify-between text-lg font-bold">
                   <span>Total</span>
-                  <span className="text-primary">{formatPrice(totalPrice)}</span>
+                  <span className="text-primary">{formatPrice(totalPrice * 100)}</span>
                 </div>
               </div>
 

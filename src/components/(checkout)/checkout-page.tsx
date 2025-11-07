@@ -12,6 +12,7 @@ import { CardSelector } from '@/components/(cards)/card-selector';
 import { AddressSelector } from '@/components/(enderecos)/address-selector';
 import { usePaymentControllerCreateOrder, useAddressControllerFindDefault } from '@/gen/api';
 import { toast } from 'sonner';
+import { formatPrice } from '@/lib/utils';
 
 export function CheckoutPage() {
   const { items, totalPrice, clearCart } = useCart();
@@ -36,13 +37,6 @@ export function CheckoutPage() {
       },
     },
   });
-
-  const formatPrice = (value: number) => {
-    return new Intl.NumberFormat('pt-BR', {
-      style: 'currency',
-      currency: 'BRL',
-    }).format(value);
-  };
 
   const handleCheckout = async () => {
     if (items.length === 0) {
@@ -185,7 +179,7 @@ export function CheckoutPage() {
                       {item.quantity}x {item.name}
                     </span>
                     <span className="font-medium">
-                      {formatPrice(item.price * item.quantity)}
+                      {formatPrice(item.price * item.quantity * 100)}
                     </span>
                   </div>
                 ))}
@@ -195,7 +189,7 @@ export function CheckoutPage() {
 
               <div className="flex justify-between text-lg font-bold">
                 <span>Total</span>
-                <span className="text-primary">{formatPrice(totalPrice)}</span>
+                <span className="text-primary">{formatPrice(totalPrice * 100)}</span>
               </div>
 
               <Button

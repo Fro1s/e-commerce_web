@@ -8,6 +8,7 @@ import { Button } from '@/components/ui/button';
 import { QrCode, Clock, Copy, Check } from 'lucide-react';
 import { toast } from 'sonner';
 import Image from 'next/image';
+import { formatPrice } from '@/lib/utils';
 
 interface PixPaymentProps {
   orderId: string;
@@ -41,13 +42,6 @@ export function PixPayment({ orderId, qrCodeData, qrCodeImage, amount }: PixPaym
       }, 1500);
     }
   }, [orderData?.status, orderId, router, isRedirecting]);
-
-  const formatPrice = (value: number) => {
-    return new Intl.NumberFormat('pt-BR', {
-      style: 'currency',
-      currency: 'BRL',
-    }).format(value / 100);
-  };
 
   const handleCopyCode = async () => {
     try {
