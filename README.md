@@ -9,13 +9,11 @@ Sistema de e-commerce completo com integração de pagamento, construído com Ne
 - [Pré-requisitos](#pré-requisitos)
 - [Instalação](#instalação)
   - [Opção 1: Instalação Local](#opção-1-instalação-local)
-  - [Opção 2: Instalação com Docker](#opção-2-instalação-com-docker)
 - [Configuração](#configuração)
 - [Uso](#uso)
 - [Comandos Disponíveis](#comandos-disponíveis)
 - [Estrutura do Projeto](#estrutura-do-projeto)
 - [Troubleshooting](#troubleshooting)
-- [Contribuindo](#contribuindo)
 
 ## 🚀 Sobre o Projeto
 
