@@ -1,8 +1,8 @@
 import { defineConfig } from 'orval';
 import * as dotenv from 'dotenv';
 
-// Carrega as variáveis do .env.local
 dotenv.config({ path: '.env.local' });
+dotenv.config({ path: '.env' });
 
 export default defineConfig({
   api: {
